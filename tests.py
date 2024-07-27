@@ -17,6 +17,5 @@ class TestMyDateTime(unittest.TestCase):
         self.assertEqual(result, expected_date)
 
 
-
 if __name__ == '__main__':
     unittest.main()
