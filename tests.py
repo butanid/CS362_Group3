@@ -24,6 +24,10 @@ class TestMyDateTime(unittest.TestCase):
         """Test whether it convert to special leap year correctly"""
         self.assertEqual(my_datetime(946684800), '01-01-2000')
 
+    def test_edge_year(self):
+        """Test whether it convert to an edge year correctly"""
+        self.assertEqual(my_datetime(253402217200), "12-31-9999")
+
 
 if __name__ == '__main__':
     unittest.main()
