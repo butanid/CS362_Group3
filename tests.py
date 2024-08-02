@@ -20,6 +20,10 @@ class TestMyDateTime(unittest.TestCase):
         """Test whether it convert to leap year correctly"""
         self.assertEqual(my_datetime(201653971200), '02-29-8360')
 
+    def test_special_leap_year(self):
+        """Test whether it convert to special leap year correctly"""
+        self.assertEqual(my_datetime(946684800), '01-01-2000')
+
 
 if __name__ == '__main__':
     unittest.main()
