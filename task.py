@@ -16,7 +16,7 @@ def my_datetime(num_sec):
     # Calculate total days since epoch "01-01-1970".
     total_days = num_sec // seconds_per_day
 
-    # Start from January 1, 1970
+    # Start from January 1, 1970.
     year = 1970
     while True:
         current_year_days = 366 if is_leap_year(year) else 365
@@ -34,6 +34,6 @@ def my_datetime(num_sec):
         month += 1
 
     # Formatting the date string
-    month += 1  # to make the month 1-indexed
-    day = total_days + 1  # to make the day 1-indexed
+    month += 1  # to make the month 1-indexed.
+    day = total_days + 1  # to make the day 1-indexed.
     return f'{month:02d}-{day:02d}-{year}'
