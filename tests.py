@@ -13,8 +13,12 @@ class TestMyDateTime(unittest.TestCase):
         self.assertEqual(my_datetime(123456789), '11-29-1973')
 
     def test_far_future_date(self):
-        """Test the far future date 9876543210 whether convert correctly"""
+        """Test the example whether convert to far future date correctly"""
         self.assertEqual(my_datetime(9876543210), '12-22-2282')
+
+    def test_leap_year_date(self):
+        """Test whether it convert to leap year correctly"""
+        self.assertEqual(my_datetime(201653971200), '02-29-8360')
 
 
 if __name__ == '__main__':
