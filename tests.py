@@ -12,9 +12,11 @@ class TestMyDateTime(unittest.TestCase):
     """Test the function my_datetime import from task.py"""
     def test_epoch_start(self):
         """Test the epoch start is correctly identified."""
-        expected_date = '01-01-1970'
-        result = my_datetime(0)
-        self.assertEqual(result, expected_date)
+        self.assertEqual(my_datetime(0), '01-01-1970')
+
+    def test_arbitrary_date(self):
+        """Test the example 123456789 whether convert to correct year"""
+        self.assertEqual(my_datetime(123456789), '11-29-1973')
 
 
 if __name__ == '__main__':
