@@ -1,4 +1,6 @@
 def my_datetime(num_sec):
+    """Function 2: takes num_sec and converts it to a date and returns it as a
+    string with the following format MM-DD-YYYY."""
     # Constants for second, minutes, hours
     seconds_per_minute = 60
     minutes_per_hour = 60
