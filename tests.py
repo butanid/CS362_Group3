@@ -6,6 +6,7 @@ from task import my_datetime
 
 class TestMyDateTime(unittest.TestCase):
     """Test the function my_datetime import from task.py"""
+
     def test_epoch_start(self):
         """Test the epoch start is correctly identified."""
         self.assertEqual(my_datetime(0), '01-01-1970')
@@ -34,6 +35,7 @@ class TestMyDateTime(unittest.TestCase):
 class TestRandomMyDatetime(unittest.TestCase):
     """Random number of seconds that potentially could span up to year
     9999 Calculate the total number of seconds from epoch to 12-31-9999"""
+
     def test_extended_random_dates(self):
         """Generate 1000 random test cases"""
         for _ in range(1000):
