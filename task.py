@@ -1,11 +1,8 @@
 def my_datetime(num_sec):
     """Function 2: takes num_sec and converts it to a date and returns it as a
     string with the following format MM-DD-YYYY."""
-    # Constants for second, minutes, hours.
-    seconds_per_minute = 60
-    minutes_per_hour = 60
-    hours_per_day = 24
-    seconds_per_day = seconds_per_minute * minutes_per_hour * hours_per_day
+    # Constants for seconds per day by 24*60*60= 86400.
+    seconds_per_day = 86400
 
     # Leap year check, such as 2000 or 2400 is leap year.
     def is_leap_year(year):
