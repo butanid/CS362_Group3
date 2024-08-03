@@ -1,24 +1,3 @@
-
-def conv_num(num_str: str) -> float | None:
-    converted_num: int | float = 0
-    negative = False
-    floating_point = False
-    for char in num_str:
-        if char == '-':
-            negative = True
-        elif char == '.':
-            floating_point = True
-        else:
-            converted_num *= 10
-            converted_num += (ord(char) - ord('0'))
-
-    if negative:
-        converted_num = -converted_num
-    if floating_point:
-        converted_num /= 100
-
-    return converted_num
-
 def my_datetime(num_sec):
     """Function 2: takes num_sec and converts it to a date and returns it as a
     string with the following format MM-DD-YYYY."""
@@ -55,3 +34,24 @@ def my_datetime(num_sec):
     month += 1  # to make the month 1-indexed.
     day = total_days + 1  # to make the day 1-indexed.
     return f'{month:02d}-{day:02d}-{year}'
+
+
+def conv_num(num_str: str) -> float | None:
+    converted_num: int | float = 0
+    negative = False
+    floating_point = False
+    for char in num_str:
+        if char == '-':
+            negative = True
+        elif char == '.':
+            floating_point = True
+        else:
+            converted_num *= 10
+            converted_num += (ord(char) - ord('0'))
+
+    if negative:
+        converted_num = -converted_num
+    if floating_point:
+        converted_num /= 100
+
+    return converted_num
