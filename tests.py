@@ -1,7 +1,7 @@
 import unittest
 import random
 from datetime import datetime, timedelta, timezone
-from task import my_datetime
+from task import my_datetime, conv_endian
 
 
 class TestMyDateTime(unittest.TestCase):
@@ -54,6 +54,10 @@ class TestRandomMyDatetime(unittest.TestCase):
 
             # Check if the result matches the expected value
             self.assertEqual(result, expected_date_str)
+
+class TestConvEndian(unittest.TestCase):
+    """Test the conv_endian function from task.py"""
+    pass
 
 
 if __name__ == '__main__':
