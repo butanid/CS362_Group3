@@ -34,3 +34,7 @@ def my_datetime(num_sec):
     month += 1  # to make the month 1-indexed.
     day = total_days + 1  # to make the day 1-indexed.
     return f'{month:02d}-{day:02d}-{year}'
+
+def conv_endian(num, endian='big'):
+    """Function takes in an integer value, converts it to a hexadecimal number, and returns it as a string"""
+    pass
