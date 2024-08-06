@@ -58,9 +58,21 @@ class TestRandomMyDatetime(unittest.TestCase):
 class TestConvEndian(unittest.TestCase):
     """Test the conv_endian function from task.py"""
     def test1(self):
-        """Test for module example #1"""
+        """Test for module example 1 with valid endian"""
         expected = '0E 91 A2'
         result = conv_endian(954786, 'big')
+        self.assertEqual(result, expected)
+
+    def test2(self):
+        """Test for module example 2 with no endian specified"""
+        expected = '0E 91 A2'
+        result = conv_endian(954786)
+        self.assertEqual(result, expected)
+
+    def test3(self):
+        """Test for module example 3 with negative integer and no endian specified"""
+        expected = '-0E 91 A2'
+        result = conv_endian(-954786)
         self.assertEqual(result, expected)
 
 
