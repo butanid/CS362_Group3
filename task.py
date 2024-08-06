@@ -42,6 +42,10 @@ def conv_endian(num, endian='big'):
     # Variable to store output
     hex_string = ""
 
+    # Checks if valid endian
+    if endian not in ('big', 'little'):
+        return None
+
     # Variable for negative numbers
     negative_num = num < 0
     # Checks if num is negative
