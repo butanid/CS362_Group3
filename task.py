@@ -36,7 +36,10 @@ def my_datetime(num_sec):
     return f'{month:02d}-{day:02d}-{year}'
 
 
-def conv_num(num_str) -> float | None:
+def conv_num(num_str) -> int | float | None:
+    """This function takes a string and converts it into a
+    base 10 number and returns it
+    """
 
     if not isinstance(num_str, str):
         return None
@@ -45,24 +48,52 @@ def conv_num(num_str) -> float | None:
         return None
 
     num_str = num_str.strip()
+    num_str = num_str.lower()
+    negative = False
+    converted_num: int | float = 0
+    hex_number = False
+
+    # if the argument is a hexadecimal number,
+    # convert it to a base 10 number.
+    if num_str.startswith('0x') or num_str.startswith('-0x'):
+        hex_number = True
+        num_str = num_str.replace('0x', '')
+        hex_num_len = len(num_str) - 1
+        hex_dictionary = {'0': 0, '1': 1, '2': 2, '3': 3,
+                          '4': 4, '5': 5, '6': 6, '7': 7,
+                          '8': 8, '9': 9, 'a': 10, 'b': 11,
+                          'c': 12, 'd': 13, 'e': 14, 'f': 15}
+
+        for char in num_str:
+            if char == '-':
+                negative = True
+                hex_num_len -= 1
+            elif char in hex_dictionary:
+                converted_num = converted_num + \
+                    hex_dictionary[char] * 16 ** hex_num_len
+                hex_num_len -= 1
+            else:
+                return None
+
     floating_point = False
 
     if num_str.count('.') == 1:
         floating_point = True
         decimal_point = num_str.find('.') + 1
+        num_len = len(num_str)
+        num_str = num_str.replace('.', '')
     elif num_str.count('.') > 1:
         return None
 
-    converted_num: int | float = 0
-    negative = False
-    num_len = len(num_str)
-
-    for char in num_str:
-        if char == '-':
-            negative = True
-        elif char.isdigit():
-            converted_num *= 10
-            converted_num += (ord(char) - ord('0'))
+    if not hex_number:
+        for char in num_str:
+            if char == '-':
+                negative = True
+            elif char.isdigit():
+                converted_num *= 10
+                converted_num += (ord(char) - ord('0'))
+            else:
+                return None
 
     if negative:
         converted_num = -converted_num
