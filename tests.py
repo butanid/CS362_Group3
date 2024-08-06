@@ -52,7 +52,7 @@ class TestConvNum(unittest.TestCase):
         self.assertEqual(conv_num(".45"), 0.45)
 
     def test_double_decimal(self):
-        """Test if a string containing more than one 
+        """Test if a string containing more than one
         decimal point returns None"""
         self.assertEqual(conv_num("12.3.45"), None)
 
