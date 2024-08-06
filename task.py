@@ -56,24 +56,34 @@ def conv_num(num_str) -> int | float | None:
     # if the argument is a hexadecimal number,
     # convert it to a base 10 number.
     if num_str.startswith('0x') or num_str.startswith('-0x'):
-        hex_number = True
-        num_str = num_str.replace('0x', '')
-        hex_num_len = len(num_str) - 1
-        hex_dictionary = {'0': 0, '1': 1, '2': 2, '3': 3,
-                          '4': 4, '5': 5, '6': 6, '7': 7,
-                          '8': 8, '9': 9, 'a': 10, 'b': 11,
-                          'c': 12, 'd': 13, 'e': 14, 'f': 15}
 
-        for char in num_str:
-            if char == '-':
-                negative = True
-                hex_num_len -= 1
-            elif char in hex_dictionary:
-                converted_num = converted_num + \
-                    hex_dictionary[char] * 16 ** hex_num_len
-                hex_num_len -= 1
-            else:
-                return None
+        hex_number = True
+
+        def conv_hex_num(hex_str):
+            converted_hex = 0
+            negative = False
+            hex_str = hex_str.replace('0x', '')
+            hex_num_len = len(hex_str) - 1
+            hex_dictionary = {'0': 0, '1': 1, '2': 2, '3': 3,
+                              '4': 4, '5': 5, '6': 6, '7': 7,
+                              '8': 8, '9': 9, 'a': 10, 'b': 11,
+                              'c': 12, 'd': 13, 'e': 14, 'f': 15}
+
+            for char in hex_str:
+                if char == '-':
+                    negative = True
+                    hex_num_len -= 1
+                elif char in hex_dictionary:
+                    converted_hex = converted_hex + \
+                        hex_dictionary[char] * 16 ** hex_num_len
+                    hex_num_len -= 1
+                else:
+                    return None
+            if negative:
+                return converted_hex * -1
+            return converted_hex
+
+        converted_num = conv_hex_num(num_str)
 
     floating_point = False
 
