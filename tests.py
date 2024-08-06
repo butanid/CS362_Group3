@@ -57,7 +57,11 @@ class TestRandomMyDatetime(unittest.TestCase):
 
 class TestConvEndian(unittest.TestCase):
     """Test the conv_endian function from task.py"""
-    pass
+    def test1(self):
+        """Test for module example #1"""
+        expected = '0E 91 A2'
+        result = conv_endian(954786, 'big')
+        self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':
