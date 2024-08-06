@@ -65,14 +65,11 @@ def conv_endian(num, endian='big'):
 
     # Checking if value of 'big' endian
     if endian == 'big':
-        result = " "
-        for pair in byte_pairs:
-            result += pair
+        result = " ".join(byte_pairs)
     # Checking if value of 'little' endian
     else:
-        result = " "
         # Reverse list of byte pairs for little endian
-        for pair in reversed(byte_pairs):
-            result += pair
+        byte_pairs.reverse()
+        result = " ".join(byte_pairs)
     
     return result
