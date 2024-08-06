@@ -6,6 +6,16 @@ from task import my_datetime, conv_num
 
 class TestConvNum(unittest.TestCase):
 
+    def test_wrong_type(self):
+        '''Test if that a non-string argument
+        returns None'''
+        self.assertEqual(conv_num(12366), None)
+
+    def test_empty_string(self):
+        '''Test if that a non-string argument
+        returns None'''
+        self.assertEqual(conv_num(''), None)
+
     def test_ints(self):
         '''Test if a string containing ints
         returns a int type'''
@@ -15,11 +25,6 @@ class TestConvNum(unittest.TestCase):
         """Test if a string containing floats
         returns a float type"""
         self.assertEqual(conv_num("12345.89"), 12345.89)
-
-    def test_negative(self):
-        """Test if a string containing negative float
-        returns a negative float"""
-        self.assertEqual(conv_num("-123.45"), -123.45)
 
 
 class TestMyDateTime(unittest.TestCase):

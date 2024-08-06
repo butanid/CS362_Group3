@@ -36,10 +36,19 @@ def my_datetime(num_sec):
     return f'{month:02d}-{day:02d}-{year}'
 
 
-def conv_num(num_str: str) -> float | None:
+def conv_num(num_str) -> float | None:
+
+    if not isinstance(num_str, str):
+        return None
+
+    if len(num_str) == 0:
+        return None
+
+    num_str = num_str.strip()
     converted_num: int | float = 0
     negative = False
     floating_point = False
+
     for char in num_str:
         if char == '-':
             negative = True
@@ -53,5 +62,7 @@ def conv_num(num_str: str) -> float | None:
         converted_num = -converted_num
     if floating_point:
         converted_num /= 100
+
+    print(converted_num)
 
     return converted_num
