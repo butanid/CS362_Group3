@@ -36,7 +36,7 @@ def my_datetime(num_sec):
     return f'{month:02d}-{day:02d}-{year}'
 
 
-def conv_num(num_str) -> int | float | None:
+def conv_num(num_str):
     """This function takes a string and converts it into a
     base 10 number and returns it
     """
@@ -50,7 +50,7 @@ def conv_num(num_str) -> int | float | None:
     num_str = num_str.strip()
     num_str = num_str.lower()
     negative = False
-    converted_num: int | float = 0
+    converted_num = 0
     hex_number = False
     floating_point = False
 
@@ -63,13 +63,12 @@ def conv_num(num_str) -> int | float | None:
 
     if num_str.count('.') == 1:
         floating_point = True
-        decimal_point = num_str.find('.') + 1
-        num_len = len(num_str)
-        num_str = num_str.replace('.', '')
+        converted_num = conv_floating_num(num_str)
+
     elif num_str.count('.') > 1:
         return None
 
-    if not hex_number:
+    if not hex_number or not floating_point:
         for char in num_str:
             if char == '-':
                 negative = True
@@ -81,9 +80,6 @@ def conv_num(num_str) -> int | float | None:
 
     if negative:
         converted_num = -converted_num
-    if floating_point:
-        power = 10 ** (num_len - decimal_point)
-        converted_num /= power
 
     return converted_num
 
@@ -111,5 +107,32 @@ def conv_hex_num(hex_str):
         else:
             return None
     if negative:
-        return converted_hex * -1
+        return -converted_hex
     return converted_hex
+
+
+def conv_floating_num(floating_num_str):
+    """Converts floating point string to floating point number and returns it"""
+
+    decimal_point = floating_num_str.find('.') + 1
+    num_len = len(floating_num_str)
+    floating_num_str = floating_num_str.replace('.', '')
+    converted_float = 0
+    negative = False
+
+    for char in floating_num_str:
+        if char == '-':
+            negative = True
+        elif char.isdigit():
+            converted_float *= 10
+            converted_float += (ord(char) - ord('0'))
+        else:
+            return None
+
+    power = 10 ** (num_len - decimal_point)
+    converted_float /= power
+
+    if negative:
+        return -converted_float
+
+    return converted_float
