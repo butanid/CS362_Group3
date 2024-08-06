@@ -51,24 +51,17 @@ def conv_num(num_str):
     num_str = num_str.lower()
     negative = False
     converted_num = 0
-    hex_number = False
-    floating_point = False
 
     # if the argument is a hexadecimal number,
     # convert it to a base 10 number.
     if num_str.startswith('0x') or num_str.startswith('-0x'):
 
-        hex_number = True
         converted_num = conv_hex_num(num_str)
 
-    if num_str.count('.') == 1:
-        floating_point = True
+    elif num_str.count('.') == 1:
         converted_num = conv_floating_num(num_str)
 
-    elif num_str.count('.') > 1:
-        return None
-
-    if not hex_number and not floating_point:
+    else:
         for char in num_str:
             if char == '-':
                 negative = True

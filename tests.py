@@ -91,6 +91,11 @@ class TestConvNum(unittest.TestCase):
         number returns an None"""
         self.assertEqual(conv_num("-0xAZ4"), None)
 
+    def test_bad_hex3(self):
+        """Test if a string containing a bad hexadecimal
+        number returns an None"""
+        self.assertEqual(conv_num("-0xAZ.4"), None)
+
 
 class TestMyDateTime(unittest.TestCase):
     """Test the function my_datetime import from task.py"""
