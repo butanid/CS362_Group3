@@ -45,24 +45,29 @@ def conv_num(num_str) -> float | None:
         return None
 
     num_str = num_str.strip()
+    floating_point = False
+
+    if num_str.count('.') == 1:
+        floating_point = True
+        decimal_point = num_str.find('.') + 1
+    elif num_str.count('.') > 1:
+        return None
+
     converted_num: int | float = 0
     negative = False
-    floating_point = False
+    num_len = len(num_str)
 
     for char in num_str:
         if char == '-':
             negative = True
-        elif char == '.':
-            floating_point = True
-        else:
+        elif char.isdigit():
             converted_num *= 10
             converted_num += (ord(char) - ord('0'))
 
     if negative:
         converted_num = -converted_num
     if floating_point:
-        converted_num /= 100
-
-    print(converted_num)
+        power = 10 ** (num_len - decimal_point)
+        converted_num /= power
 
     return converted_num

@@ -17,14 +17,44 @@ class TestConvNum(unittest.TestCase):
         self.assertEqual(conv_num(''), None)
 
     def test_ints(self):
-        '''Test if a string containing ints
+        '''Test if a string containing int
         returns a int type'''
         self.assertEqual(conv_num("1234560"), 1234560)
 
-    def test_float(self):
-        """Test if a string containing floats
+    def test_negative_ints(self):
+        '''Test if a string containing int
+        returns a int type'''
+        self.assertEqual(conv_num("-1234560"), -1234560)
+
+    def test_float1(self):
+        """Test if a string containing float
         returns a float type"""
-        self.assertEqual(conv_num("12345.89"), 12345.89)
+        self.assertEqual(conv_num("123.4589"), 123.4589)
+
+    def test_float2(self):
+        """Test if a string containing float
+        returns a float type"""
+        self.assertEqual(conv_num("1.234589"), 1.234589)
+
+    def test_float3(self):
+        """Test if a string containing negative float
+        returns a negative float type"""
+        self.assertEqual(conv_num("-1234589."), -1234589.0)
+
+    def test_float4(self):
+        """Test if a string containing negative float
+        returns a float type"""
+        self.assertEqual(conv_num("-.1234589"), -0.1234589)
+
+    def test_float5(self):
+        """Test if a string containing float
+        returns a float type"""
+        self.assertEqual(conv_num(".45"), 0.45)
+
+    def test_double_decimal(self):
+        """Test if a string containing more than one 
+        decimal point returns None"""
+        self.assertEqual(conv_num("12.3.45"), None)
 
 
 class TestMyDateTime(unittest.TestCase):
