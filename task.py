@@ -42,6 +42,12 @@ def conv_endian(num, endian='big'):
     # Variable to store output
     hex_string = ""
 
+    # Variable for negative numbers
+    negative_num = num < 0
+    # Checks if num is negative
+    if negative_num:
+        num = abs(num)
+
     # Checks if integer value is 0
     if num == 0:
         hex_string = "0"
@@ -71,5 +77,10 @@ def conv_endian(num, endian='big'):
         # Reverse list of byte pairs for little endian
         byte_pairs.reverse()
         result = " ".join(byte_pairs)
-    
+
+    # Checks if num is negative
+    if negative_num:
+        # Adding negative symbol to front of string
+        result = '-' + result
+
     return result
