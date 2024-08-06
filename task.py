@@ -68,7 +68,7 @@ def conv_num(num_str):
     elif num_str.count('.') > 1:
         return None
 
-    if not hex_number or not floating_point:
+    if not hex_number and not floating_point:
         for char in num_str:
             if char == '-':
                 negative = True
