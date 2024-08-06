@@ -37,4 +37,42 @@ def my_datetime(num_sec):
 
 def conv_endian(num, endian='big'):
     """Function takes in an integer value, converts it to a hexadecimal number, and returns it as a string"""
-    pass
+    # String of hexadecimal numbers
+    hex_digits = "0123456789ABCDEF"
+    # Variable to store output
+    hex_string = ""
+
+    # Checks if integer value is 0
+    if num == 0:
+        hex_string = "0"
+    else:
+        while num > 0:
+            # Convert integer value to hexadecimal
+            hex_string = hex_digits[num % 16] + hex_string
+            num = num // 16
+
+    # Checks if hex string is odd
+    if len(hex_string) % 2 != 0:
+        # Adding 0 to front of string for even characters
+        hex_string = '0' + hex_string
+
+    # Variable to store byte pairs
+    byte_pairs = []
+    # Loop through hex string values
+    for i in range(0, len(hex_string), 2):
+        # Split hex string into byte pairs and append to list
+        byte_pairs.append(hex_string[i:i+2])
+
+    # Checking if value of 'big' endian
+    if endian == 'big':
+        result = " "
+        for pair in byte_pairs:
+            result += pair
+    # Checking if value of 'little' endian
+    else:
+        result = " "
+        # Reverse list of byte pairs for little endian
+        for pair in reversed(byte_pairs):
+            result += pair
+    
+    return result
