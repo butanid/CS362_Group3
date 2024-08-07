@@ -41,10 +41,15 @@ def conv_num(num_str):
     base 10 number and returns it
     """
 
-    if not isinstance(num_str, str):
+    if not isinstance(num_str, str) or len(num_str) == 0:
         return None
 
-    if len(num_str) == 0:
+    # check if string contains at least one digit
+    if not any(char.isdigit() for char in num_str):
+        return None
+
+    # Check for multiple '-' and misplaced '-'
+    if num_str.count('-') > 1 or (num_str.count('-') == 1 and num_str[0] != '-'):
         return None
 
     num_str = num_str.strip()
@@ -58,9 +63,11 @@ def conv_num(num_str):
 
         converted_num = conv_hex_num(num_str)
 
+    # If not a hex digit, check for floating point number
     elif num_str.count('.') == 1:
         converted_num = conv_floating_num(num_str)
 
+    # Check for an int.
     else:
         for char in num_str:
             if char == '-':

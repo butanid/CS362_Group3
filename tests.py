@@ -96,6 +96,26 @@ class TestConvNum(unittest.TestCase):
         number returns an None"""
         self.assertEqual(conv_num("-0xAZ.4"), None)
 
+    def test_bad_input1(self):
+        """Test if a string containing a bad input '.'
+        returns an None"""
+        self.assertEqual(conv_num("."), None)
+
+    def test_bad_input2(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("123$45"), None)
+
+    def test_bad_input3(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("123-45"), None)
+
+    def test_bad_input4(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("12 3 45"), None)
+
 
 class TestMyDateTime(unittest.TestCase):
     """Test the function my_datetime import from task.py"""
