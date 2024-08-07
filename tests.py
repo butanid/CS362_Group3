@@ -5,6 +5,7 @@ from task import my_datetime, conv_num, conv_endian
 
 
 class TestConvNum(unittest.TestCase):
+    """Test the conv_num function from task.py"""
 
     def test_wrong_type1(self):
         """Test if that a non-string argument
