@@ -136,3 +136,58 @@ def my_datetime(num_sec):
     month += 1  # to make the month 1-indexed.
     day = total_days + 1  # to make the day 1-indexed.
     return f'{month:02d}-{day:02d}-{year}'
+
+
+def conv_endian(num, endian='big'):
+    """Function takes in an integer value, converts it to a hexadecimal number, and returns it as a string"""
+    # String of hexadecimal numbers
+    hex_digits = "0123456789ABCDEF"
+    # Variable to store output
+    hex_string = ""
+
+    # Checks if valid endian
+    if endian not in ('big', 'little'):
+        return None
+
+    # Variable for negative numbers
+    negative_num = num < 0
+    # Checks if num is negative
+    if negative_num:
+        num = abs(num)
+
+    # Checks if integer value is 0
+    if num == 0:
+        hex_string = "0"
+    else:
+        while num > 0:
+            # Convert integer value to hexadecimal
+            hex_string = hex_digits[num % 16] + hex_string
+            num = num // 16
+
+    # Checks if hex string is odd
+    if len(hex_string) % 2 != 0:
+        # Adding 0 to front of string for even characters
+        hex_string = '0' + hex_string
+
+    # Variable to store byte pairs
+    byte_pairs = []
+    # Loop through hex string values
+    for i in range(0, len(hex_string), 2):
+        # Split hex string into byte pairs and append to list
+        byte_pairs.append(hex_string[i:i+2])
+
+    # Checking if value of 'big' endian
+    if endian == 'big':
+        result = " ".join(byte_pairs)
+    # Checking if value of 'little' endian
+    else:
+        # Reverse list of byte pairs for little endian
+        byte_pairs.reverse()
+        result = " ".join(byte_pairs)
+
+    # Checks if num is negative
+    if negative_num:
+        # Adding negative symbol to front of string
+        result = '-' + result
+
+    return result

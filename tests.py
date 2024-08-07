@@ -1,10 +1,11 @@
 import unittest
 import random
 from datetime import datetime, timedelta, timezone
-from task import my_datetime, conv_num
+from task import my_datetime, conv_num, conv_endian
 
 
 class TestConvNum(unittest.TestCase):
+    """Test the conv_num function from task.py"""
 
     def test_wrong_type1(self):
         """Test if that a non-string argument
@@ -167,6 +168,46 @@ class TestRandomMyDatetime(unittest.TestCase):
 
             # Check if the result matches the expected value
             self.assertEqual(result, expected_date_str)
+
+
+class TestConvEndian(unittest.TestCase):
+    """Test the conv_endian function from task.py"""
+
+    def test1(self):
+        """Test for module example with valid 'big' endian"""
+        expected = '0E 91 A2'
+        result = conv_endian(954786, 'big')
+        self.assertEqual(result, expected)
+
+    def test2(self):
+        """Test for module example with no endian specified"""
+        expected = '0E 91 A2'
+        result = conv_endian(954786)
+        self.assertEqual(result, expected)
+
+    def test3(self):
+        """Test for module example with negative integer and no endian specified"""
+        expected = '-0E 91 A2'
+        result = conv_endian(-954786)
+        self.assertEqual(result, expected)
+
+    def test4(self):
+        """Test for module example with valid 'little' endian"""
+        expected = 'A2 91 0E'
+        result = conv_endian(954786, 'little')
+        self.assertEqual(result, expected)
+
+    def test5(self):
+        """Test for module example with negative value and valid 'little' endian"""
+        expected = '-A2 91 0E'
+        result = conv_endian(-954786, 'little')
+        self.assertEqual(result, expected)
+
+    def test6(self):
+        """Test for module example with negative value and invalid endian"""
+        expected = None
+        result = conv_endian(-954786, 'small')
+        self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':
