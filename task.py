@@ -46,6 +46,60 @@ def conv_num(num_str):
     return converted_num
 
 
+def conv_hex_num(hex_str):
+    """Converts a hex string to a decimal number and returns it"""
+
+    converted_hex = 0
+    negative = False
+    hex_str = hex_str.replace('0x', '')
+    hex_num_len = len(hex_str) - 1
+    hex_dictionary = {'0': 0, '1': 1, '2': 2, '3': 3,
+                      '4': 4, '5': 5, '6': 6, '7': 7,
+                      '8': 8, '9': 9, 'a': 10, 'b': 11,
+                      'c': 12, 'd': 13, 'e': 14, 'f': 15}
+
+    for char in hex_str:
+        if char == '-':
+            negative = True
+            hex_num_len -= 1
+        elif char in hex_dictionary:
+            converted_hex = converted_hex + \
+                hex_dictionary[char] * 16 ** hex_num_len
+            hex_num_len -= 1
+        else:
+            return None
+    if negative:
+        return -converted_hex
+    return converted_hex
+
+
+def conv_floating_num(floating_num_str):
+    """Converts floating point string to floating point number and returns it"""
+
+    decimal_point = floating_num_str.find('.') + 1
+    num_len = len(floating_num_str)
+    floating_num_str = floating_num_str.replace('.', '')
+    converted_float = 0
+    negative = False
+
+    for char in floating_num_str:
+        if char == '-':
+            negative = True
+        elif char.isdigit():
+            converted_float *= 10
+            converted_float += (ord(char) - ord('0'))
+        else:
+            return None
+
+    power = 10 ** (num_len - decimal_point)
+    converted_float /= power
+
+    if negative:
+        return -converted_float
+
+    return converted_float
+
+
 def my_datetime(num_sec):
     """Function 2: takes num_sec and converts it to a date and returns it as a
     string with the following format MM-DD-YYYY."""
