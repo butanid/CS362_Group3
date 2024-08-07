@@ -1,7 +1,121 @@
 import unittest
 import random
 from datetime import datetime, timedelta, timezone
-from task import my_datetime, conv_endian
+from task import my_datetime, conv_num, conv_endian
+
+
+class TestConvNum(unittest.TestCase):
+    """Test the conv_num function from task.py"""
+
+    def test_wrong_type1(self):
+        """Test if that a non-string argument
+        returns None"""
+        self.assertEqual(conv_num(12366), None)
+
+    def test_wrong_type2(self):
+        """Test if that a non-string argument
+        returns None"""
+        self.assertEqual(conv_num([12366]), None)
+
+    def test_empty_string(self):
+        """Test if that a non-string argument
+        returns None"""
+        self.assertEqual(conv_num(''), None)
+
+    def test_int(self):
+        """Test if a string containing int
+        returns a int type"""
+        self.assertEqual(conv_num("1234560"), 1234560)
+
+    def test_negative_int(self):
+        """Test if a string containing int
+        returns a int type"""
+        self.assertEqual(conv_num("-1234560"), -1234560)
+
+    def test_bad_int(self):
+        """Test if a string containing a bad int
+        returns None"""
+        self.assertEqual(conv_num("-12345A0"), None)
+
+    def test_float1(self):
+        """Test if a string containing float
+        returns a float type"""
+        self.assertEqual(conv_num("123.4589"), 123.4589)
+
+    def test_float2(self):
+        """Test if a string containing float
+        returns a float type"""
+        self.assertEqual(conv_num("1.234589"), 1.234589)
+
+    def test_float3(self):
+        """Test if a string containing negative float
+        returns a negative float type"""
+        self.assertEqual(conv_num("-1234589."), -1234589.0)
+
+    def test_float4(self):
+        """Test if a string containing negative float
+        returns a float type"""
+        self.assertEqual(conv_num("-.1234589"), -0.1234589)
+
+    def test_float5(self):
+        """Test if a string containing float
+        returns a float type"""
+        self.assertEqual(conv_num(".45"), 0.45)
+
+    def test_double_decimal(self):
+        """Test if a string containing more than one
+        decimal point returns None"""
+        self.assertEqual(conv_num("12.3.45"), None)
+
+    def test_hex1(self):
+        """Test if a string containing a hexadecimal
+        number returns an int"""
+        self.assertEqual(conv_num("0xad4"), 2772)
+
+    def test_hex2(self):
+        """Test if a string containing a hexadecimal
+        number returns an int"""
+        self.assertEqual(conv_num("0xAD4"), 2772)
+
+    def test_negative_hex(self):
+        """Test if a string containing a hexadecimal
+        number returns an int"""
+        self.assertEqual(conv_num("-0xAD4"), -2772)
+
+    def test_bad_hex(self):
+        """Test if a string containing a bad hexadecimal
+        number returns an None"""
+        self.assertEqual(conv_num("0xAZ4"), None)
+
+    def test_bad_hex2(self):
+        """Test if a string containing a bad hexadecimal
+        number returns an None"""
+        self.assertEqual(conv_num("-0xAZ4"), None)
+
+    def test_bad_hex3(self):
+        """Test if a string containing a bad hexadecimal
+        number returns an None"""
+        self.assertEqual(conv_num("-0xAZ.4"), None)
+
+    def test_bad_input1(self):
+        """Test if a string containing a bad input '.'
+        returns an None"""
+        self.assertEqual(conv_num("."), None)
+
+    def test_bad_input2(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("123$45"), None)
+
+    def test_bad_input3(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("123-45"), None)
+
+    def test_bad_input4(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("12 3 45"), None)
 
 
 class TestMyDateTime(unittest.TestCase):
@@ -77,7 +191,7 @@ class TestConvEndian(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test4(self):
-        """Test for module example with with valid 'little' endian"""
+        """Test for module example with valid 'little' endian"""
         expected = 'A2 91 0E'
         result = conv_endian(954786, 'little')
         self.assertEqual(result, expected)

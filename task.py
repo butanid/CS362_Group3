@@ -1,3 +1,51 @@
+def conv_num(num_str):
+    """This function takes a string and converts it into a
+    base 10 number and returns it
+    """
+
+    if not isinstance(num_str, str) or len(num_str) == 0:
+        return None
+
+    # check if string contains at least one digit
+    if not any(char.isdigit() for char in num_str):
+        return None
+
+    # Check for multiple '-' and misplaced '-'
+    if num_str.count('-') > 1 or (num_str.count('-') == 1 and num_str[0] != '-'):
+        return None
+
+    num_str = num_str.strip()
+    num_str = num_str.lower()
+    negative = False
+    converted_num = 0
+
+    # if the argument is a hexadecimal number,
+    # convert it to a base 10 number.
+    if num_str.startswith('0x') or num_str.startswith('-0x'):
+
+        converted_num = conv_hex_num(num_str)
+
+    # If not a hex digit, check for floating point number
+    elif num_str.count('.') == 1:
+        converted_num = conv_floating_num(num_str)
+
+    # Check for an int.
+    else:
+        for char in num_str:
+            if char == '-':
+                negative = True
+            elif char.isdigit():
+                converted_num *= 10
+                converted_num += (ord(char) - ord('0'))
+            else:
+                return None
+
+    if negative:
+        converted_num = -converted_num
+
+    return converted_num
+
+
 def my_datetime(num_sec):
     """Function 2: takes num_sec and converts it to a date and returns it as a
     string with the following format MM-DD-YYYY."""
