@@ -7,33 +7,33 @@ from task import my_datetime, conv_num
 class TestConvNum(unittest.TestCase):
 
     def test_wrong_type1(self):
-        '''Test if that a non-string argument
-        returns None'''
+        """Test if that a non-string argument
+        returns None"""
         self.assertEqual(conv_num(12366), None)
 
     def test_wrong_type2(self):
-        '''Test if that a non-string argument
-        returns None'''
+        """Test if that a non-string argument
+        returns None"""
         self.assertEqual(conv_num([12366]), None)
 
     def test_empty_string(self):
-        '''Test if that a non-string argument
-        returns None'''
+        """Test if that a non-string argument
+        returns None"""
         self.assertEqual(conv_num(''), None)
 
     def test_int(self):
-        '''Test if a string containing int
-        returns a int type'''
+        """Test if a string containing int
+        returns a int type"""
         self.assertEqual(conv_num("1234560"), 1234560)
 
     def test_negative_int(self):
-        '''Test if a string containing int
-        returns a int type'''
+        """Test if a string containing int
+        returns a int type"""
         self.assertEqual(conv_num("-1234560"), -1234560)
 
     def test_bad_int(self):
-        '''Test if a string containing a bad int
-        returns None'''
+        """Test if a string containing a bad int
+        returns None"""
         self.assertEqual(conv_num("-12345A0"), None)
 
     def test_float1(self):
