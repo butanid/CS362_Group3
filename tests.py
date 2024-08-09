@@ -117,6 +117,16 @@ class TestConvNum(unittest.TestCase):
         returns an None"""
         self.assertEqual(conv_num("12 3 45"), None)
 
+    def test_bad_input5(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("  12345"), None)
+
+    def test_bad_input6(self):
+        """Test if a string containing a bad input
+        returns an None"""
+        self.assertEqual(conv_num("12345  "), None)
+
 
 class TestMyDateTime(unittest.TestCase):
     """Test the function my_datetime import from task.py"""
