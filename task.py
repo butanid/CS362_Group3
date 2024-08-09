@@ -14,7 +14,6 @@ def conv_num(num_str):
     if num_str.count('-') > 1 or (num_str.count('-') == 1 and num_str[0] != '-'):
         return None
 
-    num_str = num_str.strip()
     num_str = num_str.lower()
     negative = False
     converted_num = 0
